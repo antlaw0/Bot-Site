@@ -11,10 +11,16 @@ var Bot = new TwitterBot({
  access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
 });
 
+//get homepage
+router.get('/', function(req, res, next){
+  res.render('index', { title: "Frank/'s Page" });
+});
+
 
 
 router.post('/postTweet', function(req, res, next){
-bot.tweet(req.body);
-
+console.log("Bot tweeted:"+ req.body.text);
+Bot.tweet(req.body.text);
+res.redirect("/");
 });//end of post
 module.exports = router;
